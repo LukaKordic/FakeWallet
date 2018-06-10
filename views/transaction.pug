@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  br
+  h2 Make transaction
+  form(method='POST', action='/users/login')
+    #form-group
+      label Wallet address:
+      input.form-control(name='wallet_address', type='text')
+    #form-group
+      label Amount:
+      input.form-control(name='amount', type='password')
+    #form-group
+      label Your private key:
+      input.form-control(name='private_key', type='password')      
+    br
+    input.btn.btn-primary(type='submit', value='Commit transaction')
