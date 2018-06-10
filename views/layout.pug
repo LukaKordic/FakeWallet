@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title Projects
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+      a.navbar-brand(href='/') Projects
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/projects/leader')
+              | My Projects 
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href='/projects/collaborator') Collaboration projects
+          li.nav-item
+            a.nav-link(href='/projects/archive') Archive
+          if user
+            li.nav-item
+              a.nav-link(href='/projects/add') Add project
+        ul.navbar-nav.navbar-right
+          if user
+            li.nav-item
+              a.nav-link(href='#') #{user.name}
+            li.nav-item
+              a.nav-link(href='/users/logout') Logout
+          else 
+            li.nav-item
+              a.nav-link(href='/users/login') Login
+            li.nav-item
+              a.nav-link(href='/users/register') Register
+
+    .container
+      block content
+      br
+      hr
+      footer
+        p Copyright &copy; 2017 Luka Kordic
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+    script(src='/js/main.js')
