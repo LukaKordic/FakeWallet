@@ -15,4 +15,4 @@ let transactionSchema = mongoose.Schema({
   }
 });
 
-let Transaction = module.exports = mongoose.model('Transaction', userSchema);
+let Transaction = module.exports = mongoose.model('Transaction', transactionSchema);

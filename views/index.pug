@@ -3,4 +3,5 @@ extends layout
 block content
   h1= "Welcome to " + title
   br
-  p My wallet address: #{user.wallet_address}
+  if user
+    p My wallet address: #{user.wallet_address}

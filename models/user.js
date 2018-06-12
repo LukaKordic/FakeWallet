@@ -20,6 +20,10 @@ let userSchema = mongoose.Schema({
   private_key:{
     type: String,
     required: true
+  },
+  amount:{
+    type: String,
+    required: true
   }
 });
 

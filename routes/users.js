@@ -18,10 +18,10 @@ router.post('/register', function(req, res){
   const password2 = req.body.password2;
   const email = req.body.email;
 
-  req.checkBody('username', 'Username is requiered.').notEmpty();
-  req.checkBody('email', 'Email is requiered.').notEmpty();
+  req.checkBody('username', 'Username is required.').notEmpty();
+  req.checkBody('email', 'Email is required.').notEmpty();
   req.checkBody('email', 'Email is not valid.').isEmail();
-  req.checkBody('password', 'Password is requiered.').notEmpty();
+  req.checkBody('password', 'Password is required.').notEmpty();
   req.checkBody('password2', 'Passwords do not match.').equals(req.body.password);
 
   let errors = req.validationErrors();
@@ -35,12 +35,13 @@ router.post('/register', function(req, res){
       username:username,
       email:email,
       password:password,
+      amount: 50,
       wallet_address: randomstring.generate({
-        length: 26,
+        length: 34,
         charset: 'alphabetic'
       }),
       private_key: randomstring.generate({
-        length: 22,
+        length: 64,
         charset:'alphabetic'
       })
     });
@@ -55,6 +56,7 @@ router.post('/register', function(req, res){
             console.log(err);
           } else {
             res.redirect('/users/login');
+            req.flash('success', 'You are now registered and can login');
           }
         });
       });
