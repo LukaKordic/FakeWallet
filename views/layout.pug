@@ -15,6 +15,7 @@ html
             li.nav-item
               a.nav-link(href='/wallets/myWallet') My wallet
               span.sr-only (current)
+          if user && !user.isAdmin
             li.nav-item
                 a.nav-link(href='/wallets/transaction') Transactions
           if user && user.isAdmin
