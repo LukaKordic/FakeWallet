@@ -35,7 +35,6 @@ router.post('/register', function(req, res){
       username:username,
       email:email,
       password:password,
-      amount: 50,
       wallet_address: randomstring.generate({
         length: 34,
         charset: 'alphabetic'

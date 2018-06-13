@@ -22,8 +22,9 @@ let userSchema = mongoose.Schema({
     required: true
   },
   amount:{
-    type: String,
-    required: true
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 
