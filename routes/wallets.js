@@ -5,16 +5,11 @@ let Wallet = require('../models/wallet');
 let Transaction = require('../models/transaction');
 let User = require('../models/user');
 
-//Register form
-router.get('/all', function(req, res){
-  res.render('all');
-});
-
-router.get('/myWallet', function(req, res){
+router.get('/myWallet', ensureAuthenticated, function(req, res){
   res.render('myWallet');
 });
 
-router.get('/transaction', function(req, res){
+router.get('/transaction', ensureAuthenticated, function(req, res){
   res.render('transaction');
 });
 
@@ -22,7 +17,6 @@ router.post('/transaction', function(req, res){
 
   const loggedUser = req.user;
 
-  // TODO: add length checks on address and key
   req.checkBody('wallet_address', 'Wallet address is required.').notEmpty().isLength({min:34});
   req.checkBody('amount', 'Amount is required.').notEmpty().isDecimal();
   req.checkBody('private_key', 'Private key is not valid.').equals(loggedUser.private_key);
@@ -60,5 +54,15 @@ router.post('/transaction', function(req, res){
     });
   }
 });
+
+//Access Control
+function ensureAuthenticated(req, res, next){
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    req.flash('danger', 'Please login');
+    res.redirect('/users/login');
+  }
+}
 
 module.exports = router;

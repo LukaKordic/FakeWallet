@@ -17,6 +17,7 @@ router.post('/register', function(req, res){
   const password = req.body.password;
   const password2 = req.body.password2;
   const email = req.body.email;
+  const adminCode = req.body.adminCode;
 
   req.checkBody('username', 'Username is required.').notEmpty();
   req.checkBody('email', 'Email is required.').notEmpty();
@@ -44,6 +45,12 @@ router.post('/register', function(req, res){
         charset:'alphabetic'
       })
     });
+
+    //check user type
+    if (adminCode == 'BankingSecretCode') {
+      newUser.isAdmin = true;
+    }
+
     bcryptjs.genSalt(10, function(err, salt){
       bcryptjs.hash(newUser.password, salt, function(err, hash){
         if (err) {
@@ -77,6 +84,15 @@ router.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
+//show all users
+router.get('/all', ensureAuthenticated, ensureAdmin, function(req, res){
+  User.find(function(err, users){
+    res.render('all', {
+      users:users
+    });
+  });
+});
+
 //logout
 router.get('/logout',function(req, res){
   req.logout();
@@ -84,9 +100,23 @@ router.get('/logout',function(req, res){
   res.redirect('/users/login');
 });
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+//Access Control
+function ensureAuthenticated(req, res, next){
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    req.flash('danger', 'Please login');
+    res.redirect('/users/login');
+  }
+}
+
+function ensureAdmin(req, res, next){
+  if (req.user.isAdmin) {
+    return next();
+  }else {
+    req.flash('danger', 'You are not authorized to do that!');
+    res.redirect('/');
+  }
+}
 
 module.exports = router;

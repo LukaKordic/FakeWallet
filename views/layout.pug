@@ -17,8 +17,9 @@ html
               span.sr-only (current)
             li.nav-item
                 a.nav-link(href='/wallets/transaction') Transactions
+          if user && user.isAdmin
             li.nav-item
-                a.nav-link(href='/wallets/all') Members
+                a.nav-link(href='/users/all') Members
 
         ul.navbar-nav.navbar-right
           if user

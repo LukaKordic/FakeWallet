@@ -1,4 +1,14 @@
 extends layout
 
 block content
-  h2 All members
+  h2 All accounts
+  br
+  hr
+  each user in users
+    h3 #{user.username}
+    ul.list-group
+      li.list-group-item Amount: #{user.amount}
+      li.list-group-item Wallet Address: #{user.wallet_address}
+      li.list-group-item Private Key: #{user.private_key}
+    br
+    
