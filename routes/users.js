@@ -62,7 +62,7 @@ router.post('/register', function(req, res){
             console.log(err);
           } else {
             res.redirect('/users/login');
-            req.flash('success', 'You are now registered and can login');
+            req.flash('success', 'Successfully registered.');
           }
         });
       });
@@ -84,10 +84,18 @@ router.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
-//show all users
+//show all users and transactions
 router.get('/all', ensureAuthenticated, ensureAdmin, function(req, res){
   User.find(function(err, users){
     res.render('all', {
+      users:users
+    });
+  });
+});
+
+router.get('/allTransactions', ensureAuthenticated, ensureAdmin, function(req, res){
+  User.find(function(err, users){
+    res.render('allTransactions', {
       users:users
     });
   });

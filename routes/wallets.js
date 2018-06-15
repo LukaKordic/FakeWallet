@@ -55,6 +55,12 @@ router.post('/transaction', function(req, res){
   }
 });
 
+
+//All transactions
+router.get('/allTransactions', function(req, res){
+  res.render('allTransactions');
+});
+
 //Access Control
 function ensureAuthenticated(req, res, next){
   if (req.isAuthenticated()) {

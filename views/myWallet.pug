@@ -2,3 +2,5 @@ extends layout
 
 block content
   h1 Login page
+  if user
+    p My wallet address: #{user.wallet_address}
