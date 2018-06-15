@@ -26,6 +26,11 @@ let userSchema = mongoose.Schema({
     required: true,
     default: 0
   },
+  bank_balance:{
+    type: Number,
+    required: true,
+    default: 100
+  },
   isAdmin:{
     type: Boolean,
     default: false

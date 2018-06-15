@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 let transactionSchema = mongoose.Schema({
-  wallet_address:{
+  sender:{
     type: String,
     required: true
   },
@@ -9,7 +9,7 @@ let transactionSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  private_key:{
+  receiver:{
     type: String,
     required: true
   }

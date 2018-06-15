@@ -1,11 +1,90 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: : #f7ffb2;
 }
 
 a {
-  color: #00B7FF;
+  color:	#014a01;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #014a01;
+    border-color: #ffffff; /*set the color you want here*/
+}
+
+img{
+  display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: auto;
+}
+
+.boldText{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.boldTextRed{
+  font-weight: bold;
+  font-size: 24px;
+  color: #b30000;
+}
+
+.loginTitle{
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #b30000;
+  display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 200px;
+}
+
+.mainText{
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.transactionTitle{
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #b30000;
+  display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 500px;
+}
+
+.btn1{
+  color: #ffffff;
+  background-color: #b30000;
+}
+
+.btn2{
+  color: #b30000;
+  background-color: #000000;
+}
+.largeTitle{
+  text-align: center;
+  font-size: 72px;
+  vertical-align: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  color: #b30000;
+  width: 100%
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+th {
+    background-color: #b30000;
+    color: white;
 }
 
 .alert-error{

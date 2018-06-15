@@ -61,8 +61,8 @@ router.post('/register', function(req, res){
           if (err) {
             console.log(err);
           } else {
+            req.flash('success', 'Successfully registered. Write down your private key: ' + newUser.private_key);
             res.redirect('/users/login');
-            req.flash('success', 'Successfully registered.');
           }
         });
       });

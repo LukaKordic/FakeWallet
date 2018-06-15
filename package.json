@@ -20,6 +20,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "2.0.0-beta11",
+    "random-number": "0.0.9",
     "randomstring": "^1.1.5",
     "req-flash": "0.0.3"
   }

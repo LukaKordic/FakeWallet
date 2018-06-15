@@ -2,23 +2,27 @@ extends layout
 
 block content
   br
-  h1 Registration
+  p(class="loginTitle") Registration
   form(method='POST', action='/users/register')
     #form-group
-      label Username:
+      label(class="boldText") Username:*
       input.form-control(name='username', type='text')
+      br
     #form-group
-      label Email:
+      label(class="boldText") Email:*
       input.form-control(name='email', type='email')
+      br
     #form-group
-      label Password:
+      label(class="boldText") Password:*
       input.form-control(name='password', type='password')
+      br
     #form-group
-      label Repeat Password:
+      label(class="boldText") Repeat Password:*
       input.form-control(name='password2', type='password')
+      br
     br
     #form-group
-      label Want to get all the money?
+      label(class="boldText") If you are a bank, insert your secret key:
       input.form-control(name='adminCode', type='password', placeholder='Enter secret code')
     br
-    input.btn.btn-primary(type='submit', value='Register')
+    input.btn.btn-primary.btn1(type='submit', value='Register')

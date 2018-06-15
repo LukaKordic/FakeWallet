@@ -1,6 +1,30 @@
 extends layout
 
 block content
-  h1 Login page
+  br
+  img(src="/images/logo.png")
+  p(class="mainText") CroCoin Value: #{value}
+
   if user
-    p My wallet address: #{user.wallet_address}
+    br
+    br
+    span(class="mainText") My wallet address:
+    span(class="boldTextRed") #{user.wallet_address}
+    br
+    br
+    span(class="mainText") My crypto balance:
+    span(class="boldTextRed") #{user.amount} CroCoins
+    br
+    br
+    span(class="mainText") My account balance: 
+    span(class="boldTextRed") #{user.bank_balance} $
+    br
+    br
+    br
+    hr
+    form(method='POST', action='/wallets/addMoneyToBankAccount')
+      #form-group
+        label(class="boldText") Add money to bank account:
+        input.form-control(name='money', type='number', step="0.01", min=0)
+      br
+      input.btn.btn-primary.center-block.btn1(type='submit', value='Add money')

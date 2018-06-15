@@ -1,12 +1,22 @@
 var express = require('express');
 var router = express.Router();
+var randomNumber = require('random-number');
 
-let Wallet = require('../models/wallet');
 let Transaction = require('../models/transaction');
 let User = require('../models/user');
+let Sale = require('../models/sale');
+
+let options = {
+  min: 8,
+  max: 9,
+  float: true
+}
+let value = randomNumber(options);
 
 router.get('/myWallet', ensureAuthenticated, function(req, res){
-  res.render('myWallet');
+  res.render('myWallet', {
+    value:value
+  });
 });
 
 router.get('/transaction', ensureAuthenticated, function(req, res){
@@ -44,6 +54,18 @@ router.post('/transaction', function(req, res){
           loggedUser.save();
           user.save();
 
+          let newTransaction = new Transaction({
+            sender:loggedUser.username,
+            receiver:user.username,
+            amount:amount
+          });
+
+          newTransaction.save(function(err){
+            if (err) {
+              console.log(err);
+            }
+          });
+
           req.flash('success', 'Transaction successfull.');
           res.redirect('/wallets/myWallet');
         } else {
@@ -57,8 +79,67 @@ router.post('/transaction', function(req, res){
 
 
 //All transactions
-router.get('/allTransactions', function(req, res){
-  res.render('allTransactions');
+router.get('/allTransactions', ensureAuthenticated, ensureAdmin, function(req, res){
+  Transaction.find(function(err, transactions){
+    if (err) {
+      console.log(err);
+    }else {
+      res.render('allTransactions', {
+        transactions:transactions
+      });
+    }
+  })
+});
+
+//All transactions
+router.get('/buySell', ensureAuthenticated, function(req, res){
+  Sale.find(function(err, sales){
+    if (err) {
+      console.log(err);
+    }else {
+      res.render('buySell', {
+        sales:sales,
+        user:req.user,
+        value:value
+      });
+    }
+  })
+});
+
+//add money to bank account
+router.post('/addMoneyToBankAccount', ensureAuthenticated, function(req, res){
+  loggedUser = req.user;
+  loggedUser.bank_balance += parseFloat(req.body.money);
+  loggedUser.save();
+  res.redirect('/wallets/myWallet');
+});
+
+//sellCroCoins
+router.post('/sellCroCoins', ensureAuthenticated, function(req, res){
+  loggedUser = req.user;
+  if(loggedUser.private_key == req.body.private_key){
+    if(loggedUser.amount >= req.body.money){
+      loggedUser.amount -= req.body.money;
+
+      let newSale = new Sale({
+        seller:loggedUser.username,
+        amount:req.body.money
+      });
+
+      newSale.save(function(err){
+        if (err) {
+          console.log(err);
+        }
+
+        req.flash('success', 'Your CroCoins are on sale.');
+        res.redirect('/wallets/buySell');
+      });
+    }else{
+      req.flash('danger', 'Unsufficient amount.');
+    }
+  }else{
+    req.flash('danger', 'Private key is not valid.');
+  }
 });
 
 //Access Control
@@ -68,6 +149,15 @@ function ensureAuthenticated(req, res, next){
   } else {
     req.flash('danger', 'Please login');
     res.redirect('/users/login');
+  }
+}
+
+function ensureAdmin(req, res, next){
+  if (req.user.isAdmin) {
+    return next();
+  }else {
+    req.flash('danger', 'You are not authorized to do that!');
+    res.redirect('/');
   }
 }
 

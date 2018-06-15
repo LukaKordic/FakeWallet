@@ -2,13 +2,15 @@ extends layout
 
 block content
   br
-  h1 Login page
+  p(class="loginTitle") Login page
   form(method='POST', action='/users/login')
     #form-group
-      label Username:
+      label(class="boldText") Username:
       input.form-control(name='username', type='text')
+      br
     #form-group
-      label Password:
+      label(class="boldText") Password:
       input.form-control(name='password', type='password')
+      br
     br
-    input.btn.btn-primary(type='submit', value='Log in')
+    input.btn.btn-primary.center-block.btn1(type='submit', value='Log in')

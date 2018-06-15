@@ -5,13 +5,13 @@ block content
   table(style='width:100%; text-align:center', class="table-bordered")
     tr
       th Name
-      th Amount
-      th Wallet Address
+      th Wallet adress
+      th Crypto amount
       th Account balance
       each user in users
         tr
           if !user.isAdmin
             td  #{user.username}
-            td  #{user.amount}
-            td  #{user.wallet_address}
-            td  hehe
+            td  #{user.wallet_adress}
+            td  #{user.amount}CroCoin
+            td  #{user.bank_balance}$

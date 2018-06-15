@@ -2,16 +2,18 @@ extends layout
 
 block content
   br
-  h2 Make transaction
+  p(class="transactionTitle") Make transaction
   form(method='POST', action='/wallets/transaction')
     #form-group
-      label Receiver address:
+      label(class="boldText") Receiver address:
       input.form-control(name='wallet_address', type='text')
     #form-group
-      label Amount:
+      label(class="boldText") Amount:
       input.form-control(name='amount', type='number', step='0.01', min='0')
     #form-group
-      label Your private key:
+      label(class="boldText") Your private key:
       input.form-control(name='private_key', type='password')      
     br
-    input.btn.btn-primary(type='submit', value='Commit transaction')
+    input.btn.btn-primary.btn1(type='submit', value='Commit transaction')
+      
+  img(src="/images/logo.png")  

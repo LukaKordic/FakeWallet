@@ -2,16 +2,13 @@ extends layout
 
 block content
   br
-  table(style='width:100%; text-align:center', class="table-bordered")
+  table(style='width:100%; text-align:center', class="table-bordered myTable")
     tr
-      th Name
+      th Sender
+      th Receiver
       th Amount
-      th Wallet Address
-      th Account balance
-      each user in users
+      each transaction in transactions
         tr
-          if !user.isAdmin
-            td  #{user.username}
-            td  #{user.amount}
-            td  #{user.wallet_address}
-            td  hehe
+          td  #{transaction.sender}
+          td  #{transaction.receiver}
+          td  #{transaction.amount}
