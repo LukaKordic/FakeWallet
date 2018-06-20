@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  br
+  form(method='POST', action='/wallets/sellCroCoins')
+    #form-group
+      label(class="boldText") Choose amount to sell:
+      input.form-control(name='money', type='number', step="0.01", min=0)
+    #form-group
+      label(class="boldText") Insert private key:
+      input.form-control(name='private_key', type='text')
+    br
+    input.btn.btn-primary.center-block.btn1(type='submit', value='Add for sale')
+
+
+    br
+    br
+    table(style='width:100%; text-align:center', class="table-bordered myTable")
+      tr
+        th Seller
+        th Amount
+        each sale in sales
+          tr
+            td #{sale.seller}
+            td #{sale.amount}
+            if sale.seller != user.username
+              td
+                button(type="submit", onclick='buy("#{sale._id}")') Buy
+
+              script.
+                function buy(d){
+                  user.amount += sale.amount;
+                  user.bank_balance -= sale.amount*value
+                }
