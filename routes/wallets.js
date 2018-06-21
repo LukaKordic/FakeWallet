@@ -23,6 +23,7 @@ router.get('/transaction', ensureAuthenticated, function(req, res){
   res.render('transaction');
 });
 
+// new transaction
 router.post('/transaction', function(req, res){
 
   const loggedUser = req.user;
@@ -91,7 +92,7 @@ router.get('/allTransactions', ensureAuthenticated, ensureAdmin, function(req, r
   })
 });
 
-//All transactions
+//buy sell
 router.get('/buySell', ensureAuthenticated, function(req, res){
   Sale.find(function(err, sales){
     if (err) {

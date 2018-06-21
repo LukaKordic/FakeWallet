@@ -84,7 +84,7 @@ router.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
-//show all users and transactions
+//show all users and transactions - bank
 router.get('/all', ensureAuthenticated, ensureAdmin, function(req, res){
   User.find(function(err, users){
     res.render('all', {
